@@ -1,6 +1,6 @@
 cask "scribe" do
-  version "1.0.0"
-  sha256 "3048dbd04483d08b9a4edb3c8fdfbe852c515128b773c0f8785ee5f595842ee4"
+  version "1.0.1"
+  sha256 "d0a93de813b0dd0a87b4fa27c9074840ef5d760cacd4efc08942db29291a2156"
 
   url "https://github.com/yifanzz/homebrew-tap/releases/download/scribe-v#{version}/Scribe-#{version}.zip",
       verified: "github.com/yifanzz/homebrew-tap/"
