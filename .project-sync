@@ -1,0 +1,9 @@
+# Managed by project-sync (~/code/docs/plans/project-sync.md).
+# docs_commit = the docs-repo commit this baseline came from.
+# Removing a file from managed: opts it out — project-sync stops touching it.
+docs_commit: 02d56685ddd184d455a0ef0457a9429b7bf000bc
+managed:
+    - .claude/settings.json
+    - .githooks/pre-commit
+    - CLAUDE.md
+    - WORK_LOG.md

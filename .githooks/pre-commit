@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Cross-project pre-commit baseline: lint + typecheck + fast tests.
+# Managed by project-sync (template lives in ~/code/docs/templates/).
+# Customize freely — project-sync reports customized files, never overwrites.
+# Activate with: git config core.hooksPath .githooks
+set -euo pipefail
+
+if [ -f package.json ]; then
+  pm=npm
+  [ -f pnpm-lock.yaml ] && pm=pnpm
+  [ -f yarn.lock ] && pm=yarn
+  for s in lint typecheck test; do
+    if command -v jq >/dev/null 2>&1 && jq -e --arg s "$s" '.scripts[$s] // empty' package.json >/dev/null; then
+      "$pm" run "$s"
+    fi
+  done
+elif [ -f go.mod ]; then
+  unformatted=$(gofmt -l . 2>/dev/null | grep -v '^vendor/' || true)
+  if [ -n "$unformatted" ]; then
+    echo "gofmt needed:" >&2
+    echo "$unformatted" >&2
+    exit 1
+  fi
+  go vet ./...
+  go test ./...
+elif [ -f pyproject.toml ] || [ -f ruff.toml ]; then
+  command -v ruff >/dev/null 2>&1 && ruff check .
+  if [ -d tests ] && command -v pytest >/dev/null 2>&1; then
+    pytest -q -x
+  fi
+fi
