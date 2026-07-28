@@ -8,3 +8,10 @@ Published Scribe 1.0.1 — first notarized build. Upstream `release.sh` now pass
 
 ## 2026-06-11 00:50 | main | infra
 Added `release-cli.sh` — publishes private-source Go CLIs as binary-only formula releases, extending the scribe/okclaw pattern (assets live on this public tap repo, source stays private). The leak-safety lives in the build flags (`-trimpath -buildvcs=false -ldflags "-s -w"`, CGO off): audited agent-lock and dotrun binaries with `strings` — no home paths, commit hashes, or credentials embedded. Formulas are fully regenerated each release from a heredoc template (deterministic, no sed-patching), tarballs are packed from an empty temp dir so only the bare binary ships, and the script refuses dirty source trees and runs `go test ./...` first.
+
+## 2026-07-28 06:06 | main | infra
+Published Scribe 1.0.2 — adds server pre-warm on dictation start. Verified against the *downloaded* asset rather than the local build: pulled the release zip back from GitHub, confirmed its sha256 matches the cask, and re-ran `spctl -a` ("Notarized Developer ID") + `stapler validate` on the extracted app. Cheap insurance against publishing a cask whose sha describes a file nobody can actually fetch.
+
+Timing note for future publishes: cut the GitHub release *before* pushing the cask bump. Between those two steps the cask URL must already resolve, or a `brew update` landing in the gap gives users a 404.
+
+Also carried along an unrelated July 6 commit that was sitting unpushed on main (`chore: sync baseline` — agent settings, pre-commit hook, CLAUDE.md template). Not mine; just unblocking the push.
