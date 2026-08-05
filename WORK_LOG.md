@@ -15,3 +15,13 @@ Published Scribe 1.0.2 — adds server pre-warm on dictation start. Verified aga
 Timing note for future publishes: cut the GitHub release *before* pushing the cask bump. Between those two steps the cask URL must already resolve, or a `brew update` landing in the gap gives users a 404.
 
 Also carried along an unrelated July 6 commit that was sitting unpushed on main (`chore: sync baseline` — agent settings, pre-commit hook, CLAUDE.md template). Not mine; just unblocking the push.
+
+## 2026-08-05 05:47 | main | infra
+Bumped the scribe cask 1.0.2 → 1.0.4, skipping 1.0.3 entirely — 1.0.3 was
+tagged and notarized in the app repo but never published here, and the built
+app was hand-copied into /Applications instead. Net effect: brew's Caskroom
+recorded 1.0.2 while the running app was 1.0.3, so `brew upgrade --cask scribe`
+would have silently *downgraded* the machine. There is no release-app.sh here
+(release-cli.sh only covers the Go formulae), so the app path is manual
+gh-release + cask-edit and it is exactly the kind of step that gets skipped
+when iterating locally. Worth automating if a third skipped version shows up.
