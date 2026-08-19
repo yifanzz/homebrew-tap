@@ -6,7 +6,9 @@ cask "okclaw" do
       verified: "github.com/yifanzz/homebrew-tap/"
   name "OkClaw"
   desc "Voice-controlled Claude Code companion"
-  homepage "https://github.com/yifanzz/okclaw"
+  homepage "https://github.com/yifanzz/homebrew-tap"
+
+  depends_on macos: :tahoe
 
   app "OkClaw.app"
 

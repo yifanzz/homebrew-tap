@@ -25,3 +25,29 @@ would have silently *downgraded* the machine. There is no release-app.sh here
 (release-cli.sh only covers the Go formulae), so the app path is manual
 gh-release + cask-edit and it is exactly the kind of step that gets skipped
 when iterating locally. Worth automating if a third skipped version shows up.
+
+## 2026-08-19 08:28 | main | fix
+
+Normalized the four tap items against `brew style`, which had three real
+offenses nobody had run before. The interesting one was `homepage`: I first
+read the tap-repo homepage on dotrun/agent-lock/scribe as a copy-paste bug and
+was about to point all three at their source repos — wrong, and `release-cli.sh`
+says why in its header (sources stay private; the only public artifacts are the
+binaries, formula text, and release notes). okclaw was the actual outlier,
+pointing at `github.com/yifanzz/okclaw`, which anonymous curl confirms is a 404
+for everyone but me. So the fix ran the opposite direction: okclaw now matches
+the other three.
+
+Added `depends_on macos: :tahoe` to both casks. The minimum came from the
+shipped artifacts, not a guess — pulled both release zips and read
+`LSMinimumSystemVersion` (26.0 in each). Used the bare symbol rather than
+`">= :tahoe"` after checking `Cask::DSL::DependsOn#macos=`, which parses with a
+default comparator of `>=`; the bare form is the minimum, so this won't lock
+users out when macOS 27 ships.
+
+Filled in CLAUDE.md, which was still the unedited project-sync template. The
+privacy invariant is the load-bearing part: pointing `homepage` at a source repo
+looks like an obvious cleanup to a fresh agent and is exactly the mistake I
+started to make. Also recorded there that the `.githooks` pre-commit baseline is
+a no-op in this repo (no package.json/go.mod/pyproject.toml), so `brew audit` is
+a manual step, not something the hook will catch.

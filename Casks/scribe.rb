@@ -5,8 +5,10 @@ cask "scribe" do
   url "https://github.com/yifanzz/homebrew-tap/releases/download/scribe-v#{version}/Scribe-#{version}.zip",
       verified: "github.com/yifanzz/homebrew-tap/"
   name "Scribe"
-  desc "Push-to-talk dictation client for the local Insight Extractor transcription server"
+  desc "Push-to-talk dictation client for the local Insight Extractor server"
   homepage "https://github.com/yifanzz/homebrew-tap"
+
+  depends_on macos: :tahoe
 
   app "Scribe.app"
 
