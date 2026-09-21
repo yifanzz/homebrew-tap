@@ -51,3 +51,6 @@ looks like an obvious cleanup to a fresh agent and is exactly the mistake I
 started to make. Also recorded there that the `.githooks` pre-commit baseline is
 a no-op in this repo (no package.json/go.mod/pyproject.toml), so `brew audit` is
 a manual step, not something the hook will catch.
+
+## 2026-09-20 19:47 | main | refactor
+Project instructions moved from CLAUDE.md to AGENTS.md so every agent (Codex, Cursor, Claude Code) reads one file; CLAUDE.md is now a one-line @AGENTS.md import. Claude Code 2.1.277+ can read AGENTS.md directly, but only in sessions that fetch feature flags, and DISABLE_TELEMETRY=1 on this machine turns that off (verified by probe), so the import stub is the load path that works everywhere and is deduped under the both-files setting.
