@@ -4,9 +4,10 @@ Yifan's public Homebrew tap (`yifanzz/tap`). Holds the formula/cask text **and**
 the release assets for a handful of personal tools. Ruby formula files, no build
 system — the only executable here is `release-cli.sh`.
 
-Global conventions (git discipline, WORK_LOG, verification, candor) live in
-`~/code/docs/global/AGENTS.md` and load via `~/.claude/CLAUDE.md` — do not
-duplicate them here. Cross-project knowledge: `~/code/docs/`.
+Global conventions load from each agent's global instructions
+(`~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`), deployed from
+`~/code/agent-skills/GLOBAL_AGENTS.md` — do not duplicate them here.
+Cross-project knowledge: `~/code/docs/`.
 
 ## Project specifics
 
