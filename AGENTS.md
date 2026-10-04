@@ -7,7 +7,6 @@ system — the only executable here is `release-cli.sh`.
 Global conventions load from each agent's global instructions
 (`~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`), deployed from
 `~/code/agent-skills/GLOBAL_AGENTS.md` — do not duplicate them here.
-Cross-project knowledge: `~/code/docs/`.
 
 ## Project specifics
 
