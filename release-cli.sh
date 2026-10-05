@@ -31,8 +31,10 @@ VERSION="${2:?usage: release-cli.sh <tool> <version>}"
 REPO="yifanzz/homebrew-tap"
 TAP_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-# Per-tool registry: source dir + formula description.
+# Per-tool registry: source dir, formula description, and any install lines
+# beyond the binary itself (EXTRA_INSTALL, Ruby, inside `def install`).
 # Adding a tool to the tap = adding a case branch here.
+EXTRA_INSTALL=""
 case "$TOOL" in
   agent-lock)
     SRC="$HOME/code/agent-queue"
@@ -41,6 +43,8 @@ case "$TOOL" in
   dotrun)
     SRC="$HOME/code/dotrun"
     DESC="Load .env files and run a command (dotenv-cli compatible)"
+    # dotrun dispatches on its name: dotrun-shell is the agent shell prefix.
+    EXTRA_INSTALL='    bin.install_symlink "dotrun" => "dotrun-shell"'
     ;;
   *)
     echo "unknown tool: $TOOL (add it to the case table in $0)" >&2
@@ -97,7 +101,8 @@ class $CLASS < Formula
 
   def install
     bin.install "$TOOL"
-  end
+${EXTRA_INSTALL:+$EXTRA_INSTALL
+}  end
 
   test do
     system "#{bin}/$TOOL", "--help"
