@@ -2,21 +2,22 @@
 class Dotrun < Formula
   desc "Load .env files and run a command (dotenv-cli compatible)"
   homepage "https://github.com/yifanzz/homebrew-tap"
-  version "0.2.2"
+  version "0.3.0"
 
   on_macos do
     on_arm do
       url "https://github.com/yifanzz/homebrew-tap/releases/download/dotrun-v#{version}/dotrun-#{version}-darwin-arm64.tar.gz"
-      sha256 "fe2ea0d90116bb5d4722ede8d63bb41393873bc56e96e464536e54b7d7a973b7"
+      sha256 "db9bd1a4a0b1357e1abafca73fed7f8c0682e9ae4ec903b4c04074504e25f066"
     end
     on_intel do
       url "https://github.com/yifanzz/homebrew-tap/releases/download/dotrun-v#{version}/dotrun-#{version}-darwin-amd64.tar.gz"
-      sha256 "f7c431b4969b4be9d98cd2d5fb2bc8bff56e967292b9e2f79db20e31d388df08"
+      sha256 "65112eb62e236cf6ccf623dcf8d83655bf91bf85d568d53cff58af77fcffaad9"
     end
   end
 
   def install
     bin.install "dotrun"
+    bin.install_symlink "dotrun" => "dotrun-shell"
   end
 
   test do
