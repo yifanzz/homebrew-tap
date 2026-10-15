@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Cross-project pre-commit baseline: lint + typecheck + fast tests.
-# Managed by project-sync (template lives in ~/code/docs/templates/).
+# Managed by project-sync (template lives in ~/code/project-sync/templates/).
 # Customize freely — project-sync reports customized files, never overwrites.
 # Activate with: git config core.hooksPath .githooks
 set -euo pipefail
