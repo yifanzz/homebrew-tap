@@ -1,7 +1,7 @@
 # Managed by project-sync (~/code/project-sync/docs/design-brief.md).
 # docs_commit = the templates-repo commit this baseline came from.
 # Removing a file from managed: opts it out — project-sync stops touching it.
-docs_commit: 66f6948edf8f801dc0391eff0ecb429380599d93
+docs_commit: ea49225a0224ef7d4122ec69390447984ecb88bd
 managed:
     - .claude/settings.json
     - .githooks/pre-commit
